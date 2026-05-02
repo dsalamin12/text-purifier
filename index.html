@@ -44,6 +44,51 @@
     </div>
 </div>
 
+    <hr style="margin: 40px 0; border: 0; border-top: 2px dashed #ddd;">
+
+<div class="box">
+    <h2>Note & List Creator</h2>
+    <p class="subtitle">Turn long paragraphs into clean bullet points instantly.</p>
+    
+    <textarea id="listInput" placeholder="Paste your long paragraph here..."></textarea>
+    
+    <div class="btns">
+        <button class="btn-main" onclick="makeBullets()">Make Bullet Points</button>
+        <button class="btn-main" onclick="makeNumbered()">Make Numbered List</button>
+        <button class="btn-danger" onclick="clearList()">Clear</button>
+    </div>
+</div>
+
+<script>
+    // New logic for the 2nd tool
+    function makeBullets() {
+        const input = document.getElementById('listInput');
+        let lines = input.value.split(/[.!?\n]/); // Split by sentences or enters
+        let bulletList = lines
+            .map(line => line.trim())
+            .filter(line => line.length > 5) // Ignore very short fragments
+            .map(line => "• " + line)
+            .join('\n');
+        input.value = bulletList;
+    }
+
+    function makeNumbered() {
+        const input = document.getElementById('listInput');
+        let lines = input.value.split(/[.!?\n]/);
+        let count = 1;
+        let numberedList = lines
+            .map(line => line.trim())
+            .filter(line => line.length > 5)
+            .map(line => (count++) + ". " + line)
+            .join('\n');
+        input.value = numberedList;
+    }
+
+    function clearList() {
+        document.getElementById('listInput').value = "";
+    }
+</script>
+
 <script>
     const input = document.getElementById('textInput');
 
